@@ -119,3 +119,69 @@ body {
 figcaption {
     margin-bottom: 30px;
 }
+
+.dbplanP {
+  color:#344a60;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  margin: 30px 50px 15px 50px;
+  text-align: justify;
+}
+
+h2 {
+  color:#344a60;
+  font-variant: small-caps;
+  font-size: 50px;
+  margin: 20px 0px 50px 50px;
+}
+
+.data-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0 50px;
+}
+
+.data-block {
+  width: 32%;
+  padding: 10px 20px;
+  color:#344a60;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  text-align: justify;
+}
+
+.data-block:not(:last-child) {
+  border-right: 2px solid #344a60;
+}
+
+.db-table {
+  width: 90%;
+  margin: 30px auto 50px auto;
+  border-collapse: collapse;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  color:#344a60;
+}
+
+.db-table th {
+  background-color: #344a60;
+  color: white;
+  padding: 12px;
+  font-variant: small-caps;
+  font-size: 22px;
+  border: 1px solid #344a60;
+}
+
+.db-table td {
+  padding: 10px 15px;
+  border: 1px solid #344a60;
+}
+
+.db-table tr:nth-child(even) {
+  background-color: #e8edf3;
+}
+
+.db-table tr:hover {
+  background-color: #dbe3ec;
+}

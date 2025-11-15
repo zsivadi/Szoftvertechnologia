@@ -1,19 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adatbázisterv</title>
+  <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
-    <nav class="navbar">
+  <nav class="navbar">
     <div class="nav-container">
       <ul class="nav-links">
         <li><a href="../index.html">Főoldal</a></li>
       </ul>
     </div>
   </nav>
+
+  <p class="dbplanP">
+    A játék adatainak tartós tárolását relációs adatbázis biztosítja. Az adatbázis célja a játékosok, karakterek,
+    ellenségek, tárgyak, helyszínek, küldetések és harc események szervezett, konzisztens és biztonságos kezelése.
+    Az alábbi fejezet bemutatja az ER-diagramot, a relációs modellt és az adatkezelési folyamatokat.
+  </p>
+
   <div class="img-container">
     <img id="dbimg" src="../pics/erd.png" alt="ER Diagramm">
     <figcaption>1. Ábra: A Projekt Blue ER Diagrammja</figcaption>
@@ -23,5 +32,111 @@
     <img id="dbimg" src="../pics/rem.png" alt="ER Diagramm">
     <figcaption>2. Ábra: A Projekt Blue Relációs modellje</figcaption>
   </div>
+
+  <h2>adatkezelés</h2>
+  <div class="data-container">
+
+    <div class="data-block">
+      <h3>Mentés</h3>
+      <p>
+        A játékos előrehaladását az adatbázis a Save és a Character táblákban rögzíti.
+        Mentéskor frissül a játékállapot, a karakterek statisztikái, az inventory tartalma,
+        valamint az aktív és befejezett küldetések állapota. A mentés automatikusan vagy
+        manuálisan is történhet, a rendszer pedig biztosítja a tranzakciók konzisztenciáját.
+      </p>
+    </div>
+
+    <div class="data-block">
+      <h3>Lekérdezés</h3>
+      <p>
+        A játék futása során a rendszer folyamatosan lekérdezi a karakterek adatait, a
+        tárgylistát, a küldetések állapotát, a helyszíneket, az NPC-ket és az ellenségek
+        statisztikáit. A lekérdezések gyors hozzáférést biztosítanak a játék aktuális
+        állapotához, ezzel támogatva a harcot, a küldetéskezelést és az interakciókat.
+      </p>
+    </div>
+
+    <div class="data-block">
+      <h3>Módosítás</h3>
+      <p>
+        A rendszer a játék eseményei alapján módosítja a karakterek tulajdonságait, az
+        inventory tartalmát, a küldetések állapotát és a harc eredményeit. A módosításokat
+        az adatbázis tranzakciók segítségével biztonságosan kezeli, így minden változtatás
+        konzisztensen kerül rögzítésre.
+      </p>
+    </div>
+
+  </div>
+
+  <h2>az adatbázissal kapcsolatban álló osztályok</h2>
+
+  <table class="db-table">
+    <tr>
+      <th>osztály</th>
+      <th>feladat</th>
+    </tr>
+
+    <tr>
+      <td>PlayerRepository</td>
+      <td>A játékosok és mentések adatainak kezelése.</td>
+    </tr>
+
+    <tr>
+      <td>CharacterRepository</td>
+      <td>A karakterek statisztikáinak és állapotváltozásainak kezelése.</td>
+    </tr>
+
+    <tr>
+      <td>InventoryRepository</td>
+      <td>A tárgyak, felszerelések és az inventory műveleteinek kezelése.</td>
+    </tr>
+
+    <tr>
+      <td>ItemRepository</td>
+      <td>A tárgyak adatainak lekérése és szűrése.</td>
+    </tr>
+
+    <tr>
+      <td>SkillRepository</td>
+      <td>A képességek és a megtanult skillek kapcsolatainak kezelése.</td>
+    </tr>
+
+    <tr>
+      <td>QuestRepository</td>
+      <td>A küldetések adatainak tárolása és elérése.</td>
+    </tr>
+
+    <tr>
+      <td>QuestProgressRepository</td>
+      <td>A küldetésállapotok frissítése és nyilvántartása.</td>
+    </tr>
+
+    <tr>
+      <td>NPCRepository</td>
+      <td>Az NPC-k adatainak és helyszín-információinak kezelése.</td>
+    </tr>
+
+    <tr>
+      <td>LocationRepository</td>
+      <td>A játék világának helyszínadatait kezeli.</td>
+    </tr>
+
+    <tr>
+      <td>EnemyRepository</td>
+      <td>Az ellenségekre vonatkozó statisztikák elérése.</td>
+    </tr>
+
+    <tr>
+      <td>CombatRepository</td>
+      <td>A harci események rögzítése és elemzése.</td>
+    </tr>
+
+    <tr>
+      <td>ParticipateRepository</td>
+      <td>A harcban résztvevő karakterek és ellenfelek összekapcsolása.</td>
+    </tr>
+  </table>
+
 </body>
+
 </html>
