@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rendszertervezés</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="../index.html">Főoldal</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="sysplan-section">
+
+  <h2>bevezetés</h2>
+  <p class="dbplanP">
+    A jelen dokumentum a Projekt Blue JRPG-hez készített rendszertervezési anyag, amely a korábban
+    elkészített H3 SRS dokumentum követelményeire épül. Célja, hogy bemutassa a játék
+    műszaki felépítését, a tervezett architektúrát, a komponensek pontos szerepét,
+    az alkalmazott tervezési mintákat és a modulok közötti kommunikációt.
+    A dokumentum biztosítja, hogy a fejlesztés következetes, átlátható és jól skálázható legyen.
+  </p>
+
+  <h2>architektúra áttekintés</h2>
+  <p class="dbplanP">
+    A rendszer egy többrétegű, tisztán szeparált architektúrát alkalmaz. A megjelenítés,
+    az alkalmazási réteg, az üzleti logika és az adatkezelés szigorúan elválik egymástól.
+    Ez garantálja a karbantarthatóságot, a modularitást, valamint az egyszerű tesztelhetőséget.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/architecture.png" alt="Architektúra">
+    <figcaption>1. Ábra: Réteges architektúra</figcaption>
+  </div>
+
+  <p class="dbplanP">
+    A frontend kizárólag a megjelenítésért és interakciókért felel.  
+    Az alkalmazási réteg REST / WebSocket csatornákon kommunikál a backend modulokkal.  
+    Az üzleti logika végzi a játékszabályok feldolgozását, mint például a harc menetét, XP számítást
+    és a küldetéslogikát.  
+    Az adatkezelési réteg repository mintát használ a strukturált adatbázis-műveletekhez.
+  </p>
+
+  <h2>komponens-terv</h2>
+  <p class="dbplanP">
+    A következő táblázat összefoglalja a rendszer fő komponenseit, felelősségeiket
+    és a köztük lévő legfontosabb kapcsolódási pontokat.
+  </p>
+
+  <table class="db-table">
+    <tr>
+      <th>Komponens / csomag</th>
+      <th>Felelősség</th>
+      <th>Kapcsolatok</th>
+    </tr>
+    <tr>
+      <td>Frontend (UI)</td>
+      <td>Menük, inventory képernyő, harci UI; események küldése a backend felé.</td>
+      <td>API Gateway / Game API</td>
+    </tr>
+    <tr>
+      <td>API Gateway / Router</td>
+      <td>Kérések fogadása, autentikáció, routing.</td>
+      <td>AuthService, GameService</td>
+    </tr>
+    <tr>
+      <td>AuthService</td>
+      <td>Hitelesítés, tokenkezelés.</td>
+      <td>PlayerRepository, DB</td>
+    </tr>
+    <tr>
+      <td>GameService</td>
+      <td>Játékrendszer logikái: karakterek, harc, inventory, küldetések.</td>
+      <td>Repositories, CombatEngine</td>
+    </tr>
+    <tr>
+      <td>CombatEngine</td>
+      <td>Harc algoritmusok, sebzés logika, AI működés.</td>
+      <td>GameService</td>
+    </tr>
+    <tr>
+      <td>Repository réteg</td>
+      <td>Adatbázis műveletek absztrakciója.</td>
+      <td>Relációs DB</td>
+    </tr>
+    <tr>
+      <td>Event Bus</td>
+      <td>Aszinkron események és notifikációk.</td>
+      <td>GameService, Analytics</td>
+    </tr>
+  </table>
+
+  <h2>interakciós terv</h2>
+  <p class="dbplanP">
+    A következő két ábra mutatja be a legjellemzőbb modulközi kommunikációs folyamatokat:
+    (1) karakter betöltése és a főmenü mentése, (2) harc indítása és eredmény mentése.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/loadchart.jpg" alt="ER Diagramm">
+    <figcaption>2. Ábra: Karakter betöltése és a Főmenü megnyitása</figcaption>
+  </div>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/battlechart.jpg" alt="ER Diagramm">
+    <figcaption>4. Ábra: A harcrendszer működése</figcaption>
+  </div>
+
+  <h2>tervezési minták</h2>
+  <p class="dbplanP">A rendszer a következő szoftvertervezési mintákat alkalmazza:</p>
+
+  <ul class="sysplan-ul">
+    <li><strong>MVC</strong> – a megjelenítési és vezérlési logika elválasztására.</li>
+    <li><strong>Repository</strong> – az adat-hozzáférés absztrakciójához.</li>
+    <li><strong>Singleton</strong> – globális konfigurációk esetén.</li>
+    <li><strong>Strategy</strong> – dinamikusan cserélhető harci és AI algoritmusokhoz.</li>
+    <li><strong>Pub-Sub / Event Bus</strong> – lazán csatolt aszinkron kommunikáció.</li>
+  </ul>
+
+  <h2>technológiai környezet</h2>
+  <table class="db-table">
+    <tr><th>Kategória</th><th>Technológia</th></tr>
+    <tr><td>Frontend</td><td>Unity UI</td></tr>
+    <tr><td>Backend</td><td>C# (.NET), REST + WebSocket</td></tr>
+    <tr><td>DB</td><td>SQLite / PostgreSQL</td></tr>
+    <tr><td>Cache</td><td>Redis</td></tr>
+    <tr><td>Események</td><td>Redis Pub/Sub</td></tr>
+    <tr><td>Monitoring</td><td>Sentry, Prometheus</td></tr>
+  </table>
+
+  <h2>külső interfészek / API-k</h2>
+  <p class="dbplanP">A rendszer elérhető külső API-kat biztosít:</p>
+
+  <table class="db-table">
+    <tr><th>Interfész</th><th>Leírás</th><th>Használat</th></tr>
+    <tr><td>/api/auth</td><td>Tokenes autentikáció</td><td>Bejelentkezés, ellenőrzés</td></tr>
+    <tr><td>/api/player</td><td>Játékos adatok</td><td>Mentés, betöltés</td></tr>
+    <tr><td>/api/inventory</td><td>Inventory műveletek</td><td>Equip/unequip</td></tr>
+    <tr><td>/api/combat</td><td>Harc modul</td><td>Szimuláció, eredmény mentés</td></tr>
+  </table>
+
+  <h2>korlátozások és feltételezések</h2>
+
+  <div class="sysplan-constraints">
+    <ul class="sysplan-ul">
+      <li>Valós idejű események WebSocket alapon működnek.</li>
+      <li>Adatbázis: ACID-elvű relációs tárolás.</li>
+      <li>Az AI elsődleges verziója rule-based, később bővíthető.</li>
+      <li>A GameService horizontálisan skálázható.</li>
+    </ul>
+  </div>
+
+  <h2>jövőbeli bővítési javaslatok</h2>
+  <p class="dbplanP sysplan-footer">
+    A rendszer moduláris kialakítása támogatja a jövőbeli fejlesztéseket, mint például:
+    online PvP mód, klaszterizált GameService, matchmaking microservice,
+    vezetői ranglista modul, vagy részletes analitikai adatrögzítés.
+  </p>
+
+</div>
+</body>
+</html>

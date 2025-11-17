@@ -128,6 +128,11 @@ figcaption {
   text-align: justify;
 }
 
+.datause {
+  color:#344a60;
+  font-family: 'Times New Roman', Times, serif;
+}
+
 h2 {
   color:#344a60;
   font-variant: small-caps;
@@ -184,4 +189,31 @@ h2 {
 
 .db-table tr:hover {
   background-color: #dbe3ec;
+}
+
+.sysplan-section {
+  margin: 40px 60px;
+}
+
+.sysplan-ul {
+  margin: 20px 0;
+  padding-left: 100px;
+}
+
+.sysplan-ul li {
+  font-size: 20px;
+  margin-bottom: 10px;
+  line-height: 1.5;
+  color:#2d3e50
+}
+
+.sysplan-constraints {
+  background-color: #f2f7fb;
+  padding: 20px 25px;
+  border-left: 4px solid #344a60;
+  border-radius: 10px;
+}
+
+.sysplan-footer {
+  margin-top: 40px;
 }
