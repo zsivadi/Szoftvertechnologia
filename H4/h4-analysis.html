@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="hu">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Analízis modell (OO Analízis)</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="../index.html">Főoldal</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <h2>Rövid bevezetés</h2>
+  <p class="dbplanP">
+    Az analízis modell célja, hogy objektumorientált nézőpontból bemutassa a Projekt Blue (2D JRPG) rendszerének
+    szerkezetét és dinamikáját. A dokumentum tartalmaz kezdeti és finomított osztálydiagramokat, osztályleírásokat, az
+    osztályok subsystem szerinti csoportosítását, valamint a kiválasztott use case-ekhez tartozó szekvencia- és
+    állapotdiagramokat.
+  </p>
+
+  <h2>Kezdeti osztálydiagram (domain osztályok)</h2>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/Osztalyok2.png" alt="Kezdeti osztálydiagram">
+    <figcaption>Kezdeti osztálydiagram.</figcaption>
+  </div>
+
+  <p class="dbplanP"><strong>2.1 Osztályok rövid leírása</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Osztály</th>
+      <th>Rövid leírás</th>
+    </tr>
+    <tr>
+      <td>Játékos</td>
+      <td>A játékot futtató felhasználó entitása — kezel mentéseket, beállításokat és a játékprofilt.</td>
+    </tr>
+    <tr>
+      <td>Karakter</td>
+      <td>A játékban irányítható szereplő(k); rendelkezik statokkal, felszereléssel és képességekkel.</td>
+    </tr>
+    <tr>
+      <td>Tárgy</td>
+      <td>Játékbeli objektumok: fogyóeszközök, felszerelések, ritka tárgyak.</td>
+    </tr>
+    <tr>
+      <td>Mentés</td>
+      <td>A játékállás tartalmát reprezentáló entitás (adott időponthoz kötött).</td>
+    </tr>
+    <tr>
+      <td>Harcrrendszer</td>
+      <td>A körökre osztott ATB logikát kezeli: sorba állítás, akciókezelés, jutalmak.</td>
+    </tr>
+  </table>
+
+  <h2>3. Osztályok subsystem-ekbe sorolása</h2>
+  <p class="dbplanP">
+    A következő logikai alrendszerek lettek kijelölve:
+  </p>
+  <div class="sysplan-section">
+    <ul class="sysplan-ul">
+      <li><strong>Felhasználói felület:</strong> Menükezelés, karakterlap, inventory, párbeszédablakok.</li>
+      <li><strong>Játékmenet:</strong> Harcrendszer, Küldetéskezelő, NPC, Karakter, Tárgy, ellenség.</li>
+      <li><strong>Adattárolás:</strong> Mentés, Adatbázis interfész (SQLite), Beállítások.</li>
+    </ul>
+  </div>
+
+  <h2>4. Dinamikus modellezés — kiválasztott Use Case-ek</h2>
+  <p class="dbplanP">
+    Kiválasztott fontosabb esetek: <em>Új játék indítása</em>, <em>Párpeszéd NPC-vel</em>, <em>Harcrendszer</em>
+  </p>
+
+  <p class="dbplanP"><strong>4.1 Új játék indítása</strong></p>
+  <div class="img-container">
+    <img id="dbimg" src="../pics/NewGame.png" alt="Új játék inditása" style="width: 70%;">
+    <figcaption>Egy új játék inditása.</figcaption>
+  </div>
+
+  <p class="dbplanP"><strong>4.2 Párbeszéd NPC-vel</strong></p>
+  <div class="img-container">
+    <img id="dbimg" src="../pics/Dialogue.png" alt="Párbeszéd NPC-vel" style="width: 50%;">
+    <figcaption>Párbeszéd egy NPC-vel.</figcaption>
+  </div>
+
+  <p class="dbplanP"><strong>4.3 Harcrendszer</strong></p>
+  <div class="img-container">
+    <img id="dbimg" src="../pics/Harcrendszer.png" alt="Harcrendszer" style="width: 50%;">
+    <figcaption>Harcrendszer lefuttatása egy ellenséggel.</figcaption>
+  </div>
+
+  <h2>5. Állapotdiagram — Mentés</h2>
+  <div class="img-container">
+    <img id="dbimg" src="../pics/AllapotDiagram.png" alt="Mentés állapotdiagramja" style="width: 20%;">
+    <figcaption>Mentés állapotdiagramja.</figcaption>
+  </div>
+
+  <h2>6. Finomított osztálydiagram (attribútumok, metódusok, multiplicitás)</h2>
+
+  <p class="dbplanP"><strong>Player</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+      <th>Megjegyzés</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>GUID</td>
+      <td>Azonosító</td>
+    </tr>
+    <tr>
+      <td>név</td>
+      <td>string</td>
+      <td>Játékos neve</td>
+    </tr>
+    <tr>
+      <td>életerő</td>
+      <td>int</td>
+      <td>HP</td>
+    </tr>
+    <tr>
+      <td>szint</td>
+      <td>int</td>
+      <td>Tapasztalati szint</td>
+    </tr>
+    <tr>
+      <td>felszerelések</td>
+      <td>List&lt;Item&gt;</td>
+      <td>Multiplicitás: 0..*</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+  void Attack(Character target)
+  void Use(Item item)
+  void LevelUp()
+</pre>
+
+  <p class="dbplanP"><strong>NPC</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+      <th>Megjegyzés</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>GUID</td>
+      <td>Azonosító</td>
+    </tr>
+    <tr>
+      <td>név</td>
+      <td>string</td>
+      <td>NPC neve</td>
+    </tr>
+    <tr>
+      <td>dialogueLines</td>
+      <td>List&lt;string&gt;</td>
+      <td>Multiplicitás: 1..*</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+string Talk()
+</pre>
+
+  <p class="dbplanP"><strong>DialogueSystem</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+    </tr>
+    <tr>
+      <td>currentDialogue</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>speaker</td>
+      <td>NPC / Player</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+void Show(string text)
+void NextLine()
+</pre>
+
+  <p class="dbplanP"><strong>Enemy</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+    </tr>
+    <tr>
+      <td>id</td>
+      <td>GUID</td>
+    </tr>
+    <tr>
+      <td>név</td>
+      <td>string</td>
+    </tr>
+    <tr>
+      <td>életerő</td>
+      <td>int</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+void Attack(Character target)
+</pre>
+
+  <p class="dbplanP"><strong>CombatSystem</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+    </tr>
+    <tr>
+      <td>combatants</td>
+      <td>List&lt;Character&gt;</td>
+    </tr>
+    <tr>
+      <td>turnQueue</td>
+      <td>ActionQueue</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+void StartCombat(List&lt;Character&gt; allies, List&lt;Character&gt; enemies)
+void ProcessTick(float deltaTime)
+void ExecuteAction(CombatAction action)
+</pre>
+
+  <p class="dbplanP"><strong>ActionQueue</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+    </tr>
+    <tr>
+      <td>actions</td>
+      <td>List&lt;CombatAction&gt;</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+void Enqueue(CombatAction action)
+CombatAction Dequeue()
+</pre>
+
+  <p class="dbplanP"><strong>GameManager</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+    </tr>
+    <tr>
+      <td>player</td>
+      <td>Player</td>
+    </tr>
+    <tr>
+      <td>currentNPC</td>
+      <td>NPC</td>
+    </tr>
+    <tr>
+      <td>currentEnemy</td>
+      <td>Enemy</td>
+    </tr>
+    <tr>
+      <td>dialogueSystem</td>
+      <td>DialogueSystem</td>
+    </tr>
+    <tr>
+      <td>combatSystem</td>
+      <td>CombatSystem</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+void StartNewGame()
+void StartDialogue(NPC npc)
+void StartCombat(Enemy enemy)
+</pre>
+
+  <p class="dbplanP"><strong>MainMenu / Menu</strong></p>
+  <table class="db-table">
+    <tr>
+      <th>Attribútum</th>
+      <th>Tipus</th>
+    </tr>
+    <tr>
+      <td>options</td>
+      <td>List&lt;string&gt;</td>
+    </tr>
+  </table>
+  <p class="dbplanP"><strong>Metódusok</strong></p>
+  <pre>
+void Show()
+void SelectOption(string option)
+</pre>
+
+  <h2>7. Kapcsolatok, szerepek, multiplicitások</h2>
+  <div class="sysplan-section">
+    <ul class="sysplan-ul">
+      <li><strong>Játékos — Karakter:</strong> 1 — * (egy játékos több karaktert kezelhet a csapatban).</li>
+      <li><strong>Karakter — Tárgy:</strong> 1 — * (inventory).</li>
+      <li><strong>JátékManager — Mentés:</strong> 1 — * (több mentés tárolható).</li>
+    </ul>
+  </div>
+
+</body>
+
+</html>

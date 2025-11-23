@@ -217,3 +217,10 @@ h2 {
 .sysplan-footer {
   margin-top: 40px;
 }
+
+pre {
+  margin-left: 80px;
+  font-family: 'Times New Roman', Times, serif;
+  color: #344a60;
+  font-size: 18px;
+}
