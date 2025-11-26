@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <title>Felhasználói felület terve</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="../index.html">Főoldal</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <h2>Felhasználói felület terve</h2>
+
+  <p class="dbplanP">
+    A Projekt Blue egy 2D-s JRPG, amely klasszikus felülnézeti világot és körökre osztott harcrendszert
+    használ. A felhasználói felület (UI) vizuális stílusa az eredeti Final Fantasy-szerű
+    ablakos, kék témájú megjelenést idézi: kék keretes panelek, jól elkülönülő információs blokkok,
+    egyszerű, áttekinthető menük.
+  </p>
+
+  <h2>1. Főmenü</h2>
+  <p class="dbplanP">
+    A főmenü egy stilizált háttér előtt jelenik meg, kék színű, keretezett ablakban. A menüben
+    a szokásos JRPG opciók találhatók: <strong>New Game</strong>, <strong>Continue</strong>,
+    <strong>Options</strong>, <strong>Exit</strong>.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/mainmenu.png" alt="Főmenü">
+    <figcaption>Főmenü</figcaption>
+  </div>
+
+  <h2>2. Világ nézet (Overworld)</h2>
+  <p class="dbplanP">
+    A világ nézet egy 2D-s felülnézeti pályát mutat, ahol a játékos egy kis pixel-art karaktert
+    irányít. A képernyő tetején egy információs sáv jelzi az aktuális küldetést
+    (például: "Active quest: Talk to the stranger in the inn."), ha van aktuális küldetés. A jobb felső sarokban
+    pedig egy világtérkép található.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/worldmap.png" alt="Világ nézet">
+    <figcaption>Világ nézet</figcaption>
+  </div>
+
+  <h2>3. Harc képernyő</h2>
+  <p class="dbplanP">
+    A harc képernyő klasszikus JRPG elrendezést követ: jobb oldalon a játékos csapatának
+    sprite-jai, bal oldalon az ellenfelek. Az alsó kék panelen részletes
+    státusz jelenik meg minden szövetségesről: név, <strong>HP</strong>, <strong>MP</strong>,
+    esetleg <strong>ATB</strong>-szerű csík. A bal alsó részen a harci parancsok kapnak
+    helyet, mint például <strong>Attack</strong>, <strong>Skill</strong>, <strong>Item</strong>,
+    <strong>Defend</strong>.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/combat.png" alt="Harc képernyő">
+    <figcaption>Harc képernyő</figcaption>
+  </div>
+
+  <h2>4. In-game menü – Karakterlap</h2>
+  <p class="dbplanP">
+    A karakterlap külön kék hátterű ablakban jelenik meg. Bal oldalt a karakter portréja
+    vagy sprite-ja látszik, mellette oldalt a fő statisztikák: név, szint (Level),
+    <strong>HP</strong>, <strong>MP</strong>, támadás (Attack), védelem
+    (Defense). Az alatta lévő panel a felszerelés elemeit listázza:
+    Weapon, Armor, Accessory-k. A cél, hogy a játékos gyorsan
+    áttekintse a karakter aktuális állapotát és fejlődését.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/karakter.png" alt="Karakterlap">
+    <figcaption>Karakterlap</figcaption>
+  </div>
+
+  <h2>5. In-game menü – Inventory</h2>
+  <p class="dbplanP">
+    Az inventory menüben a rendelkezésre álló tárgyak és felszerelések láthatóak, például a képen látható
+    <strong>Antidote</strong>, ami meggyógyítja az egyik karakteredet, ha megmérgeződik, és
+    <strong>Tent</strong>, amivel tábort lehet felállítani, hogy a karakterek pihenjenek és az életerejük feltöltődjön.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/inventory.png" alt="Inventory">
+    <figcaption>Inventory</figcaption>
+  </div>
+
+  <h2>6. Bolt</h2>
+  <p class="dbplanP">
+    A bolt képernyőn felül fülek különítik el a Buy (vásárlás) és
+    Sell (eladás) módot. A bal oldali lista az elérhető tárgyakat mutatja
+    az árukkal együtt (pl. Potion – 50G, Hi-Potion – 150G stb.), a kiválasztott sor
+    kék háttérrel kiemelve. A jobb oldali panel a kiválasztott tárgy részletes leírását,
+    hatását és árát mutatja.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/shop.png" alt="Shop mockup">
+    <figcaption>Bolt</figcaption>
+  </div>
+
+  <h2>7. Mentés / Betöltés</h2>
+  <p class="dbplanP">
+    A mentés/betöltés képernyő több mentési slotot jelenít meg listában. Mindegyik
+    sorban látható a slot sorszáma, a mentés dátuma (Date) és az összes játékidő (Play time).
+    A kiemelt slot eltérő háttérszínt kap.
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/saveload.png" alt="Mentés/Betöltés mockup">
+    <figcaption>Mentés / Betöltés</figcaption>
+  </div>
+
+  <h2>8. Beállítások</h2>
+  <p class="dbplanP">
+    A beállítások képernyő két részre oszlik: Graphics (grafika) és
+    Audio (hang). Bizonyos beállítások csak akkor jelennek meg, ha az érintett menüpontot felül kiválasztjuk.
+    A grafikai beállítások menüben a felbontás (Resolution),
+    a teljes képernyő mód (Fullscreen) és a minőségi beállítás
+    (Quality) állítható. A hang oldalon külön csúszkák szabályozzák a fő hangerő (Master volume),
+    zene (Music volume) és a hangeffektek (SFX volume) hangerejét,
+    valamint található egy globális némítás opció (Mute all).
+  </p>
+
+  <div class="img-container">
+    <img id="dbimg" src="../pics/settings.png" alt="Beállítások mockup">
+    <figcaption>Beállítások</figcaption>
+  </div>
+
+</body>
+</html>
