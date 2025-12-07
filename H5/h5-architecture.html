@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5 – Rendszer vezérlés és architektúra</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Főoldal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="doc-wrapper">
+        <div class="doc-container">
+
+            <h2 class="section-title">Rendszer vezérlés és architektúra</h2>
+
+            <p class="doc-text">
+                A Projekt Blue demó verziójában a rendszer vezérlése egyszerű, moduláris felépítést követ.
+                A komponensek közötti kommunikáció tiszta, egyirányú hívási láncokon keresztül történik.
+                A cél az volt, hogy a H4-ben bemutatott architektúra egy könnyen futtatható, minimális, de jól
+                szervezett implementációs változatban jelenjen meg.
+            </p>
+
+            <h2 class="section-title">Aktív és passzív objektumok</h2>
+
+            <p class="doc-text">
+                A rendszer két fő objektumtípust használ:
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>Aktív objektumok:</strong> olyan modulok, amelyek önálló működést valósítanak meg
+                    (pl. GameController irányítja a játék folyamatát,
+                    CombatSystem végrehajtja a harcot).
+                </li>
+
+                <li><strong>Passzív objektumok:</strong> adatot tárolnak és állapotot reprezentálnak, futási
+                    logikát nem tartalmaznak (pl. Player, Enemy, Item osztályok).</li><br>
+            </ul>
+
+            <p class="doc-text">
+                Az aktív modulok működésük során felhasználják a passzív objektumok adatait, módosítják azokat,
+                majd visszatérnek az irányításhoz a GameController felé.
+            </p>
+
+            <h2 class="section-title">Üzenetküldési mechanizmusok</h2>
+
+            <p class="doc-text">
+                A sdemó rendszer kommunikációja egyszerű függvényhívásokkal történik. A modulok közötti
+                kapcsolat szigorúan kontrollált, az alábbi folyamat szerint:
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>GameController --> CombatSystem:</strong> a harc indítása, támadások futtatása</li>
+                <li><strong>CombatSystem   --> Enemy / Player:</strong> életerő csökkentése, halál vizsgálata</li>
+                <li><strong>GameController --> DialogueSystem:</strong> párbeszédek megjelenítése</li>
+                <li><strong>GameController --> InventorySystem:</strong> tárgy hozzáadása, felhasználása</li>
+                <li><strong>GameController --> SaveLoadService:</strong> mentés és betöltés indítása</li>
+            </ul>
+
+            <h3 class="subsection-title">Példa hívási láncra:</h3>
+
+            <div class="code-block"><code>
+    GameController.StartDemo():
+        ├─ CombatSystem.StartCombat()
+        │     ├─ Player.Attack()
+        │     ├─ Enemy.TakeDamage()
+        │     └─ LootRoll()
+        ├─ InventorySystem.AddItem()
+        └─ DialogueSystem.ShowNext()
+            </code></div>
+
+            <p class="doc-text">
+                A modellben nincs körkörös függőség, minden komponens kizárólag a neki kijelölt modulokra támaszkodik.
+            </p>
+
+            <h2 class="section-title">Láthatósági szabályok</h2>
+
+            <p class="doc-text">
+                A rendszer célzottan minimalizálja a modulok közötti átláthatatlan hozzáféréseket. A főbb szabályok:
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>A GameController</strong> lát minden logikai modult (Combat, Dialogue, Inventory, Save/Load).
+                </li>
+                <li><strong>A logikai modulok</strong> nem hivatkoznak egymásra, a hívási irány mindig felülről lefelé
+                    történik.</li>
+                <li><strong>Az adatmodellek</strong> publikus adattagokat biztosítanak, de nem
+                    tartalmaznak logikát.</li>
+                <li><strong>Az Inventory / Dialogue / SaveLoad</strong> kizárólag a GameControlleren keresztül érhető el.
+                </li>
+            </ul><br>
+
+            <p class="doc-text">
+                Ezzel a felépítéssel biztosítható, hogy a skeleton projekt bővíthető legyen anélkül, hogy
+                a modulok egymástól szorosan függenének.
+            </p>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

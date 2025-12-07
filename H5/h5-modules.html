@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5 – Modulok és csomagok</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Főoldal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="doc-wrapper">
+        <div class="doc-container">
+
+            <h2 class="section-title">Modulok és csomagok</h2>
+
+            <p class="doc-text">
+                A demó verzió moduláris felépítése követi a H4 – Rendszertervezésben meghatározott logikai
+                tagolást. A projekt komponensei funkcionális csomagokba rendeződnek annak érdekében, hogy a
+                bővíthetőség, karbantarthatóság és áttekinthetőség biztosított legyen.
+            </p>
+
+            <h3 class="subsection-title">Game Controller modul</h3>
+            <p class="doc-text">
+                GameController a rendszer központi modulja, amely irányítja a játék
+                folyamatát, kezeli a különböző rendszerek meghívását és koordinálja a komponensek közötti adatáramlást.
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>Felelősség:</strong> főmenet, demó futtatása, logikai modulok meghívása.</li>
+                <li><strong>Tartalmazott osztályok:</strong> GameController</li>
+            </ul>
+
+            <h3 class="subsection-title">Combat modul</h3>
+            <p class="doc-text">
+                A CombatSystem modul valósítja meg a harc logikáját,
+                beleértve a sebzés kiszámítását, az ellenfél állapotának frissítését és a loot-sorsolást.
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>Felelősség:</strong> harcok kezelése, támadás levezetése, halálvizsgálat, loot-roll.</li>
+                <li><strong>Tartalmazott osztályok:</strong> CombatSystem, Enemy</li>
+            </ul>
+
+            <h3 class="subsection-title">Inventory modul</h3>
+            <p class="doc-text">
+                Az InventorySystem felel a játékos által birtokolt tárgyak
+                listázásáért,
+                kezeléséért és használatáért.
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>Felelősség:</strong> tárgy hozzáadása, eltávolítása, használata.</li>
+                <li><strong>Tartalmazott osztályok:</strong> InventorySystem, Item</li>
+            </ul>
+
+            <h3 class="subsection-title">Párbeszéd modul</h3>
+            <p class="doc-text">
+                A DialogueSystem gondoskodik a lépésenkénti párbeszéd
+                megjelenítéséről, NPC-kkel történő kommunikációról.
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>Felelősség:</strong> párbeszédek soronkénti kiírása.</li>
+                <li><strong>Tartalmazott osztályok:</strong> DialogueSystem</li>
+            </ul>
+
+            <h3 class="subsection-title">Mentés és betöltés modul</h3>
+            <p class="doc-text">
+                A SaveLoadService JSON alapú adatmentést és visszatöltést biztosít.
+                A későbbi adatbázisos bővítéshez ez előkészíti a perzisztencia kezelését.
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>Felelősség:</strong> játékállás mentése, korábbi állás betöltése.</li>
+                <li><strong>Tartalmazott osztályok:</strong> SaveLoadService, Player</li>
+            </ul>
+
+            <h3 class="subsection-title">Modell csomag</h3>
+            <p class="doc-text">
+                A modell csomag a játék állapotát leíró passzív objektumokat tartalmazza. Ezek nem végeznek
+                önálló logikát, kizárólag adatot tárolnak és a modulok használják őket.
+            </p><br>
+
+            <ul class="doc-list">
+                <li><strong>Felelősség:</strong> állapot reprezentálása (HP, MP, statok, tárgyak).</li>
+                <li><strong>Tartalmazott osztályok:</strong> Player, Enemy, Item</li>
+            </ul>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
