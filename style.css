@@ -16,7 +16,7 @@ body {
 .navbar {
   background-color: #2d3e50;
   padding: 0.75rem 2rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -57,7 +57,7 @@ body {
   border-radius: 0.3rem;
   margin-top: 0.5rem;
   list-style: none;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   z-index: 100;
 }
 
@@ -90,38 +90,38 @@ body {
 }
 
 .img-container {
-    text-align: center;
-    margin-top: 30px;
+  text-align: center;
+  margin-top: 30px;
 }
 
 #dbimg {
-    width: 70%;
-    display: block;
-    margin: 0 auto;
-    border-radius: 30px;
-    border: 3px solid #2b3b4d;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: 70%;
+  display: block;
+  margin: 0 auto;
+  border-radius: 30px;
+  border: 3px solid #2b3b4d;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 #dbimg:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
 
 .img-container figcaption {
-    margin-top: 10px;
-    font-style: italic;
-    color: #2b3b4d;
-    font-size: 0.95rem;
+  margin-top: 10px;
+  font-style: italic;
+  color: #2b3b4d;
+  font-size: 0.95rem;
 }
 
 figcaption {
-    margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 .dbplanP {
-  color:#344a60;
+  color: #344a60;
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;
   margin: 30px 50px 15px 50px;
@@ -129,12 +129,12 @@ figcaption {
 }
 
 .datause {
-  color:#344a60;
+  color: #344a60;
   font-family: 'Times New Roman', Times, serif;
 }
 
 h2 {
-  color:#344a60;
+  color: #344a60;
   font-variant: small-caps;
   font-size: 50px;
   margin: 20px 0px 50px 50px;
@@ -150,7 +150,7 @@ h2 {
 .data-block {
   width: 32%;
   padding: 10px 20px;
-  color:#344a60;
+  color: #344a60;
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;
   text-align: justify;
@@ -166,7 +166,7 @@ h2 {
   border-collapse: collapse;
   font-family: 'Times New Roman', Times, serif;
   font-size: 20px;
-  color:#344a60;
+  color: #344a60;
 }
 
 .db-table th {
@@ -204,7 +204,7 @@ h2 {
   font-size: 20px;
   margin-bottom: 10px;
   line-height: 1.5;
-  color:#2d3e50
+  color: #2d3e50
 }
 
 .sysplan-constraints {
@@ -223,4 +223,59 @@ pre {
   font-family: 'Times New Roman', Times, serif;
   color: #344a60;
   font-size: 18px;
+}
+
+.doc-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+.module-name {
+  color: #2a5bd7;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.code-block {
+  background: #f7f9fc;
+  border-left: 4px solid #6aa0ff;
+  padding: 14px 18px;
+  margin: 30px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: Consolas, "Courier New", monospace;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  color: #1f2937;
+  line-height: 1.5;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.code-block code {
+  display: block;
+  font-family: inherit;
+  color: inherit;
+}
+
+.subsection-title {
+  color: #2a5bd7;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+.section-title {
+  margin-left: -20px;
+}
+
+.doc-container {
+  width: 80%;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 75px;
+  background: #c3cada;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.08);
 }

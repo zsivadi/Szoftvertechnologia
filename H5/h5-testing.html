@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5 – Tesztelési terv</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Főoldal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="doc-wrapper">
+        <div class="doc-container">
+
+            <h2 class="section-title">Tesztelési stratégia</h2>
+
+            <p class="doc-text">
+                A tesztelési folyamat célja annak ellenőrzése, hogy a Projekt Blue skeleton verzió
+                funkciói hibamentesen működnek-e, illetve megfelelnek-e a H3 és H4
+                dokumentumokban leírt követelményeknek.
+            </p>
+
+            <p class="doc-text">
+                A tesztelések manuálisan történnek, mivel a skeleton konzolos környezetben fut.
+                A hangsúly a fő funkciók helyes működésének ellenőrzésén van: harcrendszer,
+                inventory kezelés, párbeszédek és mentés/betöltés.
+            </p>
+
+            <h2 class="section-title">Teszttípusok</h2>
+
+            <ul class="doc-list">
+                <li><strong>Egységtesztek:</strong> CombatSystem, DialogueSystem, InventorySystem belső viselkedésének vizsgálata.</li>
+                <li><strong>Integrációs tesztek:</strong> GameController és a logikai modulok együttműködése.</li>
+                <li><strong>Rendszerteszt:</strong> a játék teljes folyamatának lefuttatása bemenettől a kimenetig.</li>
+                <li><strong>Felhasználói teszt:</strong> manuális ellenőrzés konzolos kimenet alapján.</li>
+            </ul>
+
+            <h2 class="section-title">Tesztesetek</h2>
+
+            <h3 class="subsection-title">CombatSystem tesztek</h3>
+
+            <div class="code-block"><code>
+Teszt ID: CS-01
+Funkció: Támadás működése
+Bemenet:
+  Hero.CurrentAttack = 8
+  Enemy.HP = 25
+Elvárt eredmény:
+  Enemy.HP → 17
+Tényleges eredmény:
+  Enemy.HP = 17 (a konzol kimenet alapján)
+Állapot: Sikeres
+            </code></div>
+
+            <div class="code-block"><code>
+Teszt ID: CS-02
+Funkció: Ellenfél halála és loot dobás
+Bemenet:
+  Enemy.HP = 3
+  Hero.CurrentAttack = 10
+Elvárt eredmény:
+  Enemy meghal
+  LootRoll() lefut, 0–30% eséllyel lootot ad
+Tényleges eredmény:
+  Enemy meghalt, a harc "Győzelem!" üzenettel zárult
+  Loot = null (a futás során nem esett tárgy)
+Állapot: Sikeres
+            </code></div>
+
+            <h3 class="subsection-title">InventorySystem tesztek</h3>
+
+            <div class="code-block"><code>
+Teszt ID: INV-01
+Funkció: Tárgy hozzáadása
+Bemenet:
+  inventory.AddItem("Potion")
+Elvárt eredmény:
+  Inventory listában megjelenik 1 db "Potion"
+Tényleges eredmény:
+  "Potion" mennyisége = 1
+Állapot: Sikeres
+            </code></div>
+
+            <div class="code-block"><code>
+Teszt ID: INV-02
+Funkció: Tárgy felhasználása
+Bemenet:
+  Inventory: "Potion" mennyisége = 1
+  inventory.UseItem("Potion")
+Elvárt eredmény:
+  "Potion" mennyisége → 0
+Tényleges eredmény:
+  "Potion" mennyisége = 0, a hatás lefutott
+Állapot: Sikeres
+            </code></div>
+
+            <h3 class="subsection-title">DialogueSystem tesztek</h3>
+
+            <div class="code-block"><code>
+Teszt ID: DLG-01
+Funkció: Következő párbeszéd sor megjelenítése
+Bemenet:
+  Párbeszéd: ["Szia utazó!", "A közelben goblinok garázdálkodnak."]
+  ShowNext() hívása
+Elvárt eredmény:
+  A konzolon megjelenik: "Szia utazó!"
+Tényleges eredmény:
+  Konzol kimenet: "Szia utazó!"
+Állapot: Sikeres
+            </code></div>
+
+            <h3 class="subsection-title">SaveLoadService tesztek</h3>
+
+            <div class="code-block"><code>
+Teszt ID: SAVE-01
+Funkció: Játékállás mentése
+Bemenet:
+  Player.Name = "Hero"
+  Player.Level = 2
+  Save(player)
+Elvárt eredmény:
+  savegame.json fájl létrejön, tartalmazza a Name és Level mezőket
+Tényleges eredmény:
+  savegame.json létrejött:
+    "Name": "Hero"
+    "Level": 2
+Állapot: Sikeres
+            </code></div>
+
+            <div class="code-block"><code>
+Teszt ID: LOAD-01
+Funkció: Játékállás betöltése
+Bemenet:
+  Létező savegame.json fájl (Name = "Hero", Level = 2)
+  Load()
+Elvárt eredmény:
+  Betöltött Player objektum:
+    Name = "Hero"
+    Level = 2
+Tényleges eredmény:
+  Player.Name = "Hero"
+  Player.Level = 2
+Állapot: Sikeres
+            </code></div>
+
+            <h2 class="section-title">Eredmények összegzése</h2>
+
+            <p class="doc-text">
+                A tesztelés során minden definiált teszteset lefutott, és a várt eredményt adta.
+                A skeleton verzió a harcrendszer, az inventory kezelés, a párbeszédek és a
+                mentés/betöltés szempontjából stabilnak tekinthető.
+            </p>
+
+            <table class="db-table">
+                <tr>
+                    <th>Modul</th>
+                    <th>Tesztesetek száma</th>
+                    <th>Sikeres</th>
+                    <th>Sikertelen</th>
+                </tr>
+                <tr>
+                    <td>CombatSystem</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>InventorySystem</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>DialogueSystem</td>
+                    <td>1</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>SaveLoadService</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td>0</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

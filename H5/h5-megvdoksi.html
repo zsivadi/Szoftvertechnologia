@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H5 – Megvalósítási dokumentáció</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <ul class="nav-links">
+                <li><a href="../index.html">Főoldal</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="doc-wrapper">
+        <div class="doc-container">
+
+            <h2 class="section-title">Architektúra megvalósítása</h2>
+
+            <h3 class="subsection-title">Rétegek</h3>
+            <p class="doc-text">
+                A fejlesztés a H4 dokumentumban leírt többrétegű architektúrát követi:
+            </p>
+
+            <ul class="doc-list">
+                <li><strong>UI réteg:</strong> konzolos interfész (Program.cs, GameController)</li>
+                <li><strong>Logika réteg:</strong> CombatSystem, DialogueSystem, InventorySystem, SaveLoadService</li>
+                <li><strong>Adatmodell:</strong> az ERD alapján megvalósított osztályok</li>
+            </ul>
+
+            <h3 class="subsection-title">Megvalósítás</h3>
+            <p class="doc-text">
+                A UI réteg felel a felhasználói interakciókért.
+                A GameController vezérli a játék fő funkcióit, és meghívja a logikai modulokat.
+            </p>
+
+            <p class="doc-text">A logikai réteg főbb elemei:</p>
+            <ul class="doc-list">
+                <li><span class="module-name">CombatSystem:</span> harc, sebzés, győzelem/vesztés, loot-sorsolás</li>
+                <li><span class="module-name">DialogueSystem:</span> többlépéses párbeszédfolyamat</li>
+                <li><span class="module-name">InventorySystem:</span> tárgyak hozzáadása, használata, listázása</li>
+                <li><span class="module-name">SaveLoadService:</span> JSON alapú mentés és betöltés</li>
+            </ul>
+
+            <h2 class="section-title">Fő modulok és komponensek</h2>
+
+            <h3 class="subsection-title"><span class="module-name">GameController</span></h3>
+            <p class="doc-text">
+                A játék központi irányítója. Feladata a modulok vezérlése, a bemutató futtatása,
+                és a logikai egységek összehangolása.
+            </p>
+
+            <pre class="code-block"><code>
+    // Harc indítása
+    CombatSystem combat = new CombatSystem(hero, enemy);
+    combat.StartCombat();
+            </code></pre>
+
+            <h3 class="subsection-title"><span class="module-name">CombatSystem</span></h3>
+            <p class="doc-text">
+                A harcrendszer a támadásokat, sebzéseket és az ellenfél halálát kezeli.
+                Az ERD alapján kiterjesztett Enemy modellhez loot-sorsolási mechanizmus tartozik.
+            </p>
+
+            <pre class="code-block"><code>
+    var reward = enemy.RollLoot();
+    if (reward != null)
+        inventory.AddItem(reward);
+            </code></pre>
+
+            <h3 class="subsection-title"><span class="module-name">InventorySystem</span></h3>
+            <p class="doc-text">
+                A játékos tárgyait tároló és kezelő rendszer.
+            </p>
+
+            <h3 class="subsection-title"><span class="module-name">DialogueSystem</span></h3>
+            <p class="doc-text">
+                A rendszer támogatja a lépésenkénti párbeszéd megjelenítést.
+            </p>
+
+            <h3 class="subsection-title"><span class="module-name">SaveLoadService</span></h3>
+            <p class="doc-text">
+                A játékos teljes állapotát JSON formátumban menti és tölti vissza.
+            </p>
+
+            <h2 class="section-title">Tervezési minták</h2>
+
+            <ul class="doc-list">
+                <li><span class="module-name">MVC:</span> Model – Controller – Console View felosztás</li>
+                <li><span class="module-name">Repository:</span> későbbi bővítési lehetőség</li>
+                <li><span class="module-name">Modularizált logika:</span> önálló komponensek</li>
+            </ul>
+
+            <h2 class="section-title">Használt technológiák</h2>
+
+            <ul class="doc-list">
+                <li>C# (.NET 7)</li>
+                <li>Konzolos futtatási környezet</li>
+                <li>JSON (mentési formátum)</li>
+                <li>Git verziókezelés</li>
+            </ul>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
