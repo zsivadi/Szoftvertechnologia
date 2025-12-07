@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="hu">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projekt Blue Dokumentáció</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
   <nav class="navbar">
     <div class="nav-container">
       <ul class="nav-links">
         <li><a href="index.html">Főoldal</a></li>
+        <li><a href="pdf/H1_Projekt_Blue.pdf" download>H1</a></li>
+        <li><a href="pdf/H2_Projekt_Blue.pdf" download>H2</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropbtn">H3 ▾</a>
+          <ul class="dropdown-menu">
+            <li><a href="pdf/H3_SRS.pdf" download>H3 - SRS</a></li>
+            <li><a href="pdf/H3_Felhdoksi.pdf" download>H3 - Felhasználói doksi</a></li>
+            <li><a href="pdf/H3_Szotar.pdf" download>H3 - Szótár</a></li>
+            <li><a href="pdf/H3_Munkanaplo.pdf" download>H3 - Munkanapló</a></li>
+          </ul>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropbtn">H4 ▾</a>
           <ul class="dropdown-menu">
@@ -26,9 +39,12 @@
         <li class="dropdown">
           <a href="#" class="dropbtn">H5 ▾</a>
           <ul class="dropdown-menu">
-            <li><a href="#">H5 - placeholder</a></li>
-            <li><a href="#">H5 - placeholder</a></li>
-            <li><a href="#">H5 - placeholder</a></li>
+            <li><a href="#">H5 - Megvalósítási doksi</a></li>
+            <li><a href="code/Skeleton.rar" download>H5 - Forráskód</a></li>
+            <li><a href="#">H5 - Tesztelési terv</a></li>
+            <li><a href="#">H5 - Rendszer vezérlés és architektúra</a></li>
+            <li><a href="#">H5 - Modulok és csomagok</a></li>
+            <li><a href="#">H5 - Munkanapló</a></li>
           </ul>
         </li>
       </ul>
@@ -41,4 +57,5 @@
 
   <script src="script.js"></script>
 </body>
+
 </html>
